@@ -21,10 +21,35 @@ public class TelegramBot extends TelegramLongPollingBot {
     public void onUpdateReceived(Update update) {
         // We check if the update has a message and the message has text
         if (update.hasMessage() && update.getMessage().hasText()) {
-            SendMessage message = new SendMessage(); // Create a SendMessage object with mandatory fields
-            message.setChatId(update.getMessage().getChatId().toString());
-            message.setText(update.getMessage().getText());
+            String messageText = update.getMessage().getText();
+            SendMessage message = new SendMessage();
+            if (messageText.startsWith("/")){
+                String[] commandAndArgs = messageText.split(" ");
+                String command = commandAndArgs[0];
+                message.setChatId(update.getMessage().getChatId().toString());
+                if (command.equals("/hotels")) {
+                    String location = commandAndArgs[1];
+                    // Retreive data from the AP and met en forme le texte pour l'envoyer
 
+                }else if (command.equals("/restaurants")) {
+                    String location = commandAndArgs[1];
+                    // Retreive data from the AP and met en forme le texte pour l'envoyer
+
+                }else if (command.equals("/parking")) {
+                    String location = commandAndArgs[1];
+                    // Retreive data from the AP and met en forme le texte pour l'envoyer
+
+                }else if (command.equals("/gasstations")) {
+                    String location = commandAndArgs[1];
+                    // Retreive data from the AP and met en forme le texte pour l'envoyer
+                }else{
+                    message.setText(update.getMessage().getText()+" is not a valid command");
+                    message.setText("Valid commands are: /hotels 'City name' , /restaurants 'City name', /parking 'City name', /gasstations 'City name'");
+                }
+            }else{
+                message.setText(update.getMessage().getText()+" is not a command");
+                message.setText("Valid commands are: /hotels 'City name' , /restaurants 'City name', /parking 'City name', /gasstations 'City name'");
+            }
             try {
                 execute(message); // Call method to send the message
             } catch (TelegramApiException e) {
