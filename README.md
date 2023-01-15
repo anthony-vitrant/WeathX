@@ -6,7 +6,7 @@ You can use commands like :
 ```
   /hotels Trento
 ```
-To get the list of the first 5 hotels near Trento.But you can search other things , like : **Restaurants** , **Museums** , **Gas Stations** , **Parkings** .
+To get the list of the first 5 hotels near Trento.But you can search other things , like : **Restaurants** , **Museums** , **Gas Stations** , **Parkings** & the **Weather**.
 Moreover the bot will send you the actual forecast of the city, to help you making the decision to go to the Restaurant or order it on Uber Eats for example.
  
 Let's see an example.
