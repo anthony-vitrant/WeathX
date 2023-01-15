@@ -22,7 +22,7 @@ public class WeatherParser implements Parser {
         temp = temp.split(",")[0];
         System.out.println(temp);
 
-        WeatherMessage = "The weather is "+main+" and the temperature is "+temp+"°C";
+        WeatherMessage = "The weather is '"+main+"' and the temperature is "+temp+"°C";
         return WeatherMessage;
     }
 }

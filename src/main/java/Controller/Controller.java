@@ -34,4 +34,9 @@ public class Controller {
         return new GasStationParser().parseJson(latlon);
     }
 
+    public String getWeatherByCityName(String cityName) throws IOException, InterruptedException {
+        latlon = nominatimAPI.getLatLonFromJson(nominatimAPI.getLatLonByCityName(cityName));
+        return new WeatherParser().parseJson(latlon);
+    }
+
 }
