@@ -37,6 +37,14 @@ public class TelegramBot extends TelegramLongPollingBot {
                 String[] commandAndArgs = messageText.split(" ");
                 String command = commandAndArgs[0];
 
+                if (commandAndArgs[1] == " " || commandAndArgs[1] == null){
+                    message.setText("Please enter a location");
+                    try {
+                        execute(message);
+                    } catch (TelegramApiException e) {
+                        e.printStackTrace();
+                    }
+                }
                 if (command.equals("/hotels")) {
                     String location = commandAndArgs[1];
                     message.setText("Searching for Hotels in "+location);
