@@ -91,6 +91,15 @@ public class TelegramBot extends TelegramLongPollingBot {
                     } catch (TelegramApiException | IOException | InterruptedException e) {
                         e.printStackTrace();
                     }
+                }else if (command.equals("/weather")) {
+                    String location = commandAndArgs[1];
+                    message.setText("Searching for the weather at "+location);
+                    try {
+                        execute(message);
+                        message.setText(controller.getWeatherByCityName(location));
+                    } catch (TelegramApiException | IOException | InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }else{
                     message.setText("'"+update.getMessage().getText()+"' is not a valid command  \nValid commands are: /hotels 'City name' , /restaurants 'City name', /parking 'City name', /gasstations 'City name'");
                 }

@@ -8,7 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class HotelParser implements Parser {
     String HotelJson;
     String WeatherMessage;
-    String HotelMessage="";
+    String HotelMessage="Hotels :\n";
     @Override
     public String parseJson(List<String> latlon) throws IOException, InterruptedException {
 

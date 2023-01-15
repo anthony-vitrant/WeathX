@@ -9,7 +9,7 @@ import java.util.List;
 public class ParkingParser implements Parser{
     String ParkingJson;
     String WeatherMessage;
-    String ParkingMessage="";
+    String ParkingMessage="Parking :\n";
     @Override
     public String parseJson(List<String> latlon) throws IOException, InterruptedException {
         WeatherMessage = new WeatherParser().parseJson(latlon);
