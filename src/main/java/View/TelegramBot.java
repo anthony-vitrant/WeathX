@@ -1,3 +1,5 @@
+package View;
+
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -19,51 +21,48 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update update) {
-        // We check if the update has a message and the message has text
+        System.out.println(update.getMessage().getText());
         if (update.hasMessage() && update.getMessage().hasText()) {
+
             String messageText = update.getMessage().getText();
             SendMessage message = new SendMessage();
+            message.setChatId(update.getMessage().getChatId().toString());
+
             if (messageText.startsWith("/")){
+
                 String[] commandAndArgs = messageText.split(" ");
                 String command = commandAndArgs[0];
-                message.setChatId(update.getMessage().getChatId().toString());
+
                 if (command.equals("/hotels")) {
                     String location = commandAndArgs[1];
-                    // Retreive data from the AP and met en forme le texte pour l'envoyer
+                    message.setText("Searching for Hotels in "+location);
 
                 }else if (command.equals("/restaurants")) {
                     String location = commandAndArgs[1];
                     // Retreive data from the AP and met en forme le texte pour l'envoyer
+                    message.setText("Searching for Restaurants in "+location);
 
                 }else if (command.equals("/parking")) {
                     String location = commandAndArgs[1];
                     // Retreive data from the AP and met en forme le texte pour l'envoyer
+                    message.setText("Searching for Parking in "+location);
 
                 }else if (command.equals("/gasstations")) {
                     String location = commandAndArgs[1];
                     // Retreive data from the AP and met en forme le texte pour l'envoyer
+                    message.setText("Searching for Gas Stations in "+location);
+
                 }else{
-                    message.setText(update.getMessage().getText()+" is not a valid command");
-                    message.setText("Valid commands are: /hotels 'City name' , /restaurants 'City name', /parking 'City name', /gasstations 'City name'");
+                    message.setText("'"+update.getMessage().getText()+"' is not a valid command  \nValid commands are: /hotels 'City name' , /restaurants 'City name', /parking 'City name', /gasstations 'City name'");
                 }
             }else{
-                message.setText(update.getMessage().getText()+" is not a command");
-                message.setText("Valid commands are: /hotels 'City name' , /restaurants 'City name', /parking 'City name', /gasstations 'City name'");
+                message.setText("'"+update.getMessage().getText()+"' is not a command  \nCommands are: /hotels 'City name' , /restaurants 'City name', /parking 'City name', /gasstations 'City name'");
             }
             try {
                 execute(message); // Call method to send the message
             } catch (TelegramApiException e) {
                 e.printStackTrace();
             }
-        }
-    }
-
-    public static void main(String[] args) {
-        try {
-            TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
-            botsApi.registerBot(new TelegramBot());
-        } catch (TelegramApiException e) {
-            e.printStackTrace();
         }
     }
 }
