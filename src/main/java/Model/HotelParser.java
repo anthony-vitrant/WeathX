@@ -8,7 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class HotelParser implements Parser {
     String HotelJson;
     String WeatherMessage;
-    String HotelMessage;
+    String HotelMessage="";
     @Override
     public String parseJson(List<String> latlon) throws IOException, InterruptedException {
 
@@ -29,7 +29,7 @@ public class HotelParser implements Parser {
             } else {
                 shortenedString = displayName;
             }
-            HotelMessage += shortenedString + "\n";
+            HotelMessage += "- "+shortenedString + "\n";
             System.out.println(shortenedString);
             counter++;
             if (counter == 5) { //5times max

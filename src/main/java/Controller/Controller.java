@@ -1,9 +1,6 @@
 package Controller;
 
-import Model.HotelParser;
-import Model.NominatimAPI;
-import Model.OpenStreetMapAPI;
-import Model.WeatherAPI;
+import Model.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -19,22 +16,22 @@ public class Controller {
 
     public String getRestaurantsByCityName(String cityName) throws IOException, InterruptedException {
         latlon = nominatimAPI.getLatLonFromJson(nominatimAPI.getLatLonByCityName(cityName));
-        return null;
+        return new RestaurantParser().parseJson(latlon);
     }
 
     public String getParkingsByCityName(String cityName) throws IOException, InterruptedException {
         latlon = nominatimAPI.getLatLonFromJson(nominatimAPI.getLatLonByCityName(cityName));
-        return null;
+        return new ParkingParser().parseJson(latlon);
     }
 
     public String getMuseumsByCityName(String cityName) throws IOException, InterruptedException {
         latlon = nominatimAPI.getLatLonFromJson(nominatimAPI.getLatLonByCityName(cityName));
-        return null;
+        return new MuseumParser().parseJson(latlon);
     }
 
     public String getGasStationsByCityName(String cityName) throws IOException, InterruptedException {
         latlon = nominatimAPI.getLatLonFromJson(nominatimAPI.getLatLonByCityName(cityName));
-        return null;
+        return new GasStationParser().parseJson(latlon);
     }
 
 }
