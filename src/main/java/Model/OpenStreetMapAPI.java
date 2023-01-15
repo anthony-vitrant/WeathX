@@ -1,3 +1,5 @@
+package Model;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -23,6 +25,16 @@ public class OpenStreetMapAPI {
                 .build();
         HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
         System.out.println("RESTAURANTS = "+response.body());
+        return response.body();
+    }
+
+    public String getMuseumsByLatLon(String lat , String lon) throws IOException, InterruptedException {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("https://nominatim.openstreetmap.org/search.php?q=museum+near+"+lat+"%2C"+lon+"&format=jsonv2"))
+                .method("GET", HttpRequest.BodyPublishers.noBody())
+                .build();
+        HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+        System.out.println("MUSEUMS = "+response.body());
         return response.body();
     }
 
@@ -77,10 +89,10 @@ public class OpenStreetMapAPI {
         String json = api2.getLatLonByCityName("Trento");
         List<String> latlon = api2.getLatLonFromJson(json);
         api.getHotelsByLatLon(latlon.get(0), latlon.get(1));
-        api.getRestaurantsByLatLon(latlon.get(0), latlon.get(1));
-        api.getParkingsByLatLon(latlon.get(0), latlon.get(1));
-        api.getGasStationByLatLon(latlon.get(0), latlon.get(1));
-        api.getParksByLatLon(latlon.get(0), latlon.get(1));
-        api.getSupermarketByLatLon(latlon.get(0), latlon.get(1));
+//        api.getRestaurantsByLatLon(latlon.get(0), latlon.get(1));
+//        api.getParkingsByLatLon(latlon.get(0), latlon.get(1));
+//        api.getGasStationByLatLon(latlon.get(0), latlon.get(1));
+//        api.getParksByLatLon(latlon.get(0), latlon.get(1));
+//        api.getSupermarketByLatLon(latlon.get(0), latlon.get(1));
     }
 }

@@ -1,3 +1,5 @@
+package Model;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.*;
@@ -8,7 +10,7 @@ public class WeatherAPI {
 
     public String GetWeatherByLatLon(String lat, String lon) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("https://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lon+"&appid="+APIkey))
+                .uri(URI.create("https://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lon+"&appid="+APIkey+"&units=metric"))
                 .method("GET", HttpRequest.BodyPublishers.noBody())
                 .build();
         HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
