@@ -1,5 +1,6 @@
 package View;
 
+import Controller.Controller;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -7,7 +8,10 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
+import java.io.IOException;
+
 public class TelegramBot extends TelegramLongPollingBot {
+    Controller controller = new Controller();
 
     @Override
     public String getBotUsername() {
@@ -36,22 +40,49 @@ public class TelegramBot extends TelegramLongPollingBot {
                 if (command.equals("/hotels")) {
                     String location = commandAndArgs[1];
                     message.setText("Searching for Hotels in "+location);
+                    try {
+                        execute(message);
+                        message.setText(controller.getHotelsByCityName(location));
+                    } catch (TelegramApiException | IOException | InterruptedException e) {
+                        e.printStackTrace();
+                    }
 
                 }else if (command.equals("/restaurants")) {
                     String location = commandAndArgs[1];
-                    // Retreive data from the AP and met en forme le texte pour l'envoyer
                     message.setText("Searching for Restaurants in "+location);
-
-                }else if (command.equals("/parking")) {
+                    try {
+                        execute(message);
+                        message.setText(controller.getRestaurantsByCityName(location));
+                    } catch (TelegramApiException | IOException | InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }else if (command.equals("/museums")) {
                     String location = commandAndArgs[1];
-                    // Retreive data from the AP and met en forme le texte pour l'envoyer
+                    message.setText("Searching for Museums in "+location);
+                    try {
+                        execute(message);
+                        message.setText(controller.getMuseumsByCityName(location));
+                    } catch (TelegramApiException | IOException | InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }else if (command.equals("/parkings")) {
+                    String location = commandAndArgs[1];
                     message.setText("Searching for Parking in "+location);
-
+                    try {
+                        execute(message);
+                        message.setText(controller.getParkingsByCityName(location));
+                    } catch (TelegramApiException | IOException | InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }else if (command.equals("/gasstations")) {
                     String location = commandAndArgs[1];
-                    // Retreive data from the AP and met en forme le texte pour l'envoyer
                     message.setText("Searching for Gas Stations in "+location);
-
+                    try {
+                        execute(message);
+                        message.setText(controller.getGasStationsByCityName(location));
+                    } catch (TelegramApiException | IOException | InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }else{
                     message.setText("'"+update.getMessage().getText()+"' is not a valid command  \nValid commands are: /hotels 'City name' , /restaurants 'City name', /parking 'City name', /gasstations 'City name'");
                 }

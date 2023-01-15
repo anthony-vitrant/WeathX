@@ -89,10 +89,10 @@ public class OpenStreetMapAPI {
         String json = api2.getLatLonByCityName("Trento");
         List<String> latlon = api2.getLatLonFromJson(json);
         api.getHotelsByLatLon(latlon.get(0), latlon.get(1));
-        api.getRestaurantsByLatLon(latlon.get(0), latlon.get(1));
-        api.getParkingsByLatLon(latlon.get(0), latlon.get(1));
-        api.getGasStationByLatLon(latlon.get(0), latlon.get(1));
-        api.getParksByLatLon(latlon.get(0), latlon.get(1));
-        api.getSupermarketByLatLon(latlon.get(0), latlon.get(1));
+//        api.getRestaurantsByLatLon(latlon.get(0), latlon.get(1));
+//        api.getParkingsByLatLon(latlon.get(0), latlon.get(1));
+//        api.getGasStationByLatLon(latlon.get(0), latlon.get(1));
+//        api.getParksByLatLon(latlon.get(0), latlon.get(1));
+//        api.getSupermarketByLatLon(latlon.get(0), latlon.get(1));
     }
 }
